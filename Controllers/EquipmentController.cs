@@ -21,24 +21,41 @@ namespace OOAD.Controllers
         {
             _context = context;
         }
-        [HttpPost]
-        public async Task<IActionResult> getUser([FromBody]string value)
+        [HttpPost("new")]
+        public async Task<IActionResult> addEquipment([FromBody]EquipmentForAddDto equipmentForAddDto)
         {
+            var exist = await _context.Equipments.FirstOrDefaultAsync(x => x.E_name == equipmentForAddDto.E_name);
 
-            var users = await (from user in _context.Users
-                               select new
-                               {
-                                   id = user.Id,
-                                   username = user.Username,
-                                   studentId = user.StudentId,
-                                   firstname = user.Firstname,
-                                   lastname = user.Lastname,
-                                   role = user.Role,
-                                   email = user.Email,
-                                   telephone = user.Telephon
-                               }).FirstOrDefaultAsync(x => x.studentId == value);
-            return Ok();
+            if (exist != null)
+            {
+                return BadRequest();
+            }
+
+            var equipment = new Equipments();
+            equipment.E_name = equipmentForAddDto.E_name;
+            equipment.E_total = 0;
+            equipment.E_amount = 0;
+            await _context.Equipments.AddAsync(equipment);
+            await _context.SaveChangesAsync();
+            return StatusCode(201);
         }
 
+        [HttpPost("update")]
+        public async Task<IActionResult> updateEquipment([FromBody]EquipmentForAddDto equipmentForAddDto)
+        {
+            Equipments existing = await _context.Equipments.FindAsync(equipmentForAddDto.E_ID);
+            existing.E_name = equipmentForAddDto.E_name;
+            existing.E_total = equipmentForAddDto.E_total;
+            await _context.SaveChangesAsync();
+
+            return Ok("updated successfully!");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetValues()
+        {
+            var equipments = await _context.Equipments.ToListAsync();
+            return Ok(equipments);
+        }
     }
 }
