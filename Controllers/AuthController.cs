@@ -39,7 +39,13 @@ namespace OOAD.Controllers
 
             var userToCreate = new User
             {
-                Username = userForRegisterDto.Username
+                Username = userForRegisterDto.Username,
+                StudentId = userForRegisterDto.StudentId,
+                Firstname = userForRegisterDto.Firstname,
+                Lastname = userForRegisterDto.Lastname,
+                Faculty = userForRegisterDto.Faculty,
+                Telephon = userForRegisterDto.Telephon,
+                Email = userForRegisterDto.Email
             };
 
             var creteUser = await _repo.Register(userToCreate, userForRegisterDto.Password);

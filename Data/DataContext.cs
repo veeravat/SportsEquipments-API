@@ -9,5 +9,8 @@ namespace OOAD.Data
 
         public DbSet<Value> Values { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<Equipments> Equipments { get; set; }
+        public DbSet<EquipmentsReserve> EquipmentsReserve { get; set; }
+        public DbSet<EquipmentsRent> EquipmentsRent { get; set; }
     }
 }

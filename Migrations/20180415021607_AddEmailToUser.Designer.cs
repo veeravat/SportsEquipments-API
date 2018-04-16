@@ -10,61 +10,14 @@ using System;
 namespace OOAD.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20180415021607_AddEmailToUser")]
+    partial class AddEmailToUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "2.0.1-rtm-125");
-
-            modelBuilder.Entity("OOAD.Models.Equipments", b =>
-                {
-                    b.Property<int>("E_ID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("E_amount");
-
-                    b.Property<string>("E_name");
-
-                    b.Property<int>("E_total");
-
-                    b.HasKey("E_ID");
-
-                    b.ToTable("Equipments");
-                });
-
-            modelBuilder.Entity("OOAD.Models.EquipmentsRent", b =>
-                {
-                    b.Property<int>("Rent_ID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("E_ID");
-
-                    b.Property<int>("Rent_by");
-
-                    b.Property<string>("Rent_time");
-
-                    b.HasKey("Rent_ID");
-
-                    b.ToTable("EquipmentsRent");
-                });
-
-            modelBuilder.Entity("OOAD.Models.EquipmentsReserve", b =>
-                {
-                    b.Property<int>("Resv_ID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("E_ID");
-
-                    b.Property<int>("Resv_by");
-
-                    b.Property<string>("Resv_time");
-
-                    b.HasKey("Resv_ID");
-
-                    b.ToTable("EquipmentsReserve");
-                });
 
             modelBuilder.Entity("OOAD.Models.User", b =>
                 {

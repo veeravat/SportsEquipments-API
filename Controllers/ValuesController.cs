@@ -9,7 +9,7 @@ using OOAD.Data;
 
 namespace OOAD.Controllers
 {
-    [Authorize]
+    [AllowAnonymous]
     [Route("api/[controller]")]
 
     public class ValuesController : Controller

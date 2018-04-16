@@ -42,6 +42,7 @@ namespace OOAD.Data
             CreatePasswordHash(password, out passwordHash, out passwordSalt);
             user.PasswordHash = passwordHash;
             user.PasswordSalt = passwordSalt;
+            user.Role = "0";
 
             await _context.Users.AddAsync(user);
             await _context.SaveChangesAsync();
