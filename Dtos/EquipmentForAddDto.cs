@@ -10,4 +10,17 @@ namespace OOAD.Dtos
         public int E_total { get; set; }
         
     }
+    public class EquipmentForRentDto
+    {
+        [Required] public int E_ID { get; set; }
+        [Required] public int Rent_by { get; set; }
+        
+    }
+
+        public class EquipmentForResvDto
+    {
+        [Required] public int E_ID { get; set; }
+        [Required] public int Resv_by { get; set; }
+        
+    }
 }

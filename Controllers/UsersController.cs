@@ -8,11 +8,11 @@ using Microsoft.EntityFrameworkCore;
 using OOAD.Data;
 
 
-namespace OOAD.Controllers
+namespace OOAD.Controllers  
 {
     [AllowAnonymous]
     [Route("api/[controller]")]
-    public class UsersController : Controller
+    public class UsersController : Controller 
     {
         private readonly DataContext _context;
         public UsersController(DataContext context)
@@ -43,6 +43,7 @@ namespace OOAD.Controllers
         [HttpPost]
         public async Task<IActionResult> getUser([FromBody]string value)
         {
+            
             Console.WriteLine(value);
             var users = await (from user in _context.Users
                                select new
@@ -54,7 +55,9 @@ namespace OOAD.Controllers
                                    lastname = user.Lastname,
                                    role = user.Role,
                                    email = user.Email,
-                                   telephone = user.Telephon
+                                   telephone = user.Telephon,
+                                   rented = user.Rented,
+                                   reseverd = user.Reserved,
                                }).FirstOrDefaultAsync(x => x.studentId == value);
             if (users != null)
             {
@@ -62,7 +65,6 @@ namespace OOAD.Controllers
             }else{
                 return NoContent();
             }
-
         }
     }
 }

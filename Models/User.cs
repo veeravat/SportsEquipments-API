@@ -15,7 +15,8 @@ namespace OOAD.Models
         public string Telephon { get; set; }
         public string Role { get; set; }
         public string Email { get; set; }
-
+        public int Rented { get; set; }
+        public int Reserved { get; set; }
 
     }
 }

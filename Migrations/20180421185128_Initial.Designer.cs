@@ -10,8 +10,8 @@ using System;
 namespace OOAD.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20180415194757_AddEquipmentDBSet")]
-    partial class AddEquipmentDBSet
+    [Migration("20180421185128_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -28,7 +28,11 @@ namespace OOAD.Migrations
 
                     b.Property<string>("E_name");
 
+                    b.Property<int>("E_resv");
+
                     b.Property<int>("E_total");
+
+                    b.Property<int>("E_used");
 
                     b.HasKey("E_ID");
 
@@ -44,7 +48,9 @@ namespace OOAD.Migrations
 
                     b.Property<int>("Rent_by");
 
-                    b.Property<string>("Rent_time");
+                    b.Property<string>("Rent_status");
+
+                    b.Property<int>("Rent_time");
 
                     b.HasKey("Rent_ID");
 
@@ -60,11 +66,27 @@ namespace OOAD.Migrations
 
                     b.Property<int>("Resv_by");
 
-                    b.Property<string>("Resv_time");
+                    b.Property<string>("Resv_status");
+
+                    b.Property<int>("Resv_time");
 
                     b.HasKey("Resv_ID");
 
                     b.ToTable("EquipmentsReserve");
+                });
+
+            modelBuilder.Entity("OOAD.Models.EquipmentsReturn", b =>
+                {
+                    b.Property<int>("Return_ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("Rent_ID");
+
+                    b.Property<int>("Return_time");
+
+                    b.HasKey("Return_ID");
+
+                    b.ToTable("EquipmentsReturn");
                 });
 
             modelBuilder.Entity("OOAD.Models.User", b =>
@@ -84,6 +106,10 @@ namespace OOAD.Migrations
 
                     b.Property<byte[]>("PasswordSalt");
 
+                    b.Property<int>("Rented");
+
+                    b.Property<int>("Reserved");
+
                     b.Property<string>("Role");
 
                     b.Property<string>("StudentId");
@@ -95,18 +121,6 @@ namespace OOAD.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
-                });
-
-            modelBuilder.Entity("OOAD.Models.Value", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Name");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Values");
                 });
 #pragma warning restore 612, 618
         }
