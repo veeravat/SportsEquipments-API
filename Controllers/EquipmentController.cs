@@ -59,7 +59,7 @@ namespace OOAD.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetValues()
+        public async Task<IActionResult> GetEquipment()
         {
             var equipments = await _context.Equipments.ToListAsync();
 

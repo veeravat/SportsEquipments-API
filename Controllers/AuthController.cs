@@ -73,7 +73,8 @@ namespace OOAD.Controllers
                 {
                     new Claim(ClaimTypes.NameIdentifier, userFromRepo.Id.ToString()),
                     new Claim(ClaimTypes.Name, userFromRepo.Username ),
-                    new Claim(ClaimTypes.Role, userFromRepo.Role )
+                    new Claim(ClaimTypes.Role, userFromRepo.Role ),
+                    new Claim(ClaimTypes.SerialNumber, userFromRepo.StudentId )
                 }),
                 Expires = DateTime.Now.AddDays(1),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key),
