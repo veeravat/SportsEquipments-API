@@ -65,5 +65,12 @@ namespace OOAD.Data
 
             return false;
         }
+        public async Task<bool> UserIDExists(string userid)
+        {
+            if (await _context.Users.AnyAsync(x => x.StudentId == userid))
+                return true;
+
+            return false;
+        }
     }
 }

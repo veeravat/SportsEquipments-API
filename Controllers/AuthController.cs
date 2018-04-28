@@ -28,10 +28,13 @@ namespace OOAD.Controllers
         public async Task<IActionResult> Register([FromBody]UserForRegisterDto userForRegisterDto)
         {
             userForRegisterDto.Username = userForRegisterDto.Username.ToLower();
+            userForRegisterDto.StudentId = userForRegisterDto.StudentId;
 
             if (await _repo.UserExists(userForRegisterDto.Username))
                 ModelState.AddModelError("Username", "Username is already taken");
 
+            if (await _repo.UserIDExists(userForRegisterDto.StudentId))
+                ModelState.AddModelError("StudentID", "Student ID is already taken");
 
             // validate request
             if (!ModelState.IsValid)
@@ -70,7 +73,8 @@ namespace OOAD.Controllers
                 {
                     new Claim(ClaimTypes.NameIdentifier, userFromRepo.Id.ToString()),
                     new Claim(ClaimTypes.Name, userFromRepo.Username ),
-                    new Claim(ClaimTypes.Role, userFromRepo.Role )
+                    new Claim(ClaimTypes.Role, userFromRepo.Role ),
+                    new Claim(ClaimTypes.SerialNumber, userFromRepo.StudentId )
                 }),
                 Expires = DateTime.Now.AddDays(1),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key),
