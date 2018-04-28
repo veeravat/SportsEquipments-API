@@ -30,6 +30,7 @@ namespace OOAD
         {
             var key = Encoding.ASCII.GetBytes(Configuration.GetSection("AppSettings:Token").Value);
             services.AddDbContext<DataContext>(x => x.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
+            // services.AddDbContext<DataContext>(x => x.UseSqlServer(Configuration.GetConnectionString("AzureSQL")));
             services.AddMvc();
             services.AddCors();
             services.AddScoped<IAuthRepository,AuthRepository>();
